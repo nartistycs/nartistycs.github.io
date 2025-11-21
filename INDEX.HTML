@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Produk | NARTISTYCS</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Font Inter -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', Times New Roman;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Kontainer Utama -->
+    <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-white shadow-xl rounded-xl mt-6 mb-12">
+
+        <!-- Header dan Profil Toko -->
+        <header class="text-center mb-10 border-b pb-6 border-pink-100">
+            
+            <!-- Logo Toko Baru Ditambahkan -->
+            <div class="mb-4">
+                <img src="https://i.imgur.com/8KLuWKi.jpeg" 
+                     alt="Logo Toko Your Clay Brand" 
+                     class="h-24 w-24 mx-auto object-contain rounded-full border-4 border-pink-200 shadow-md">
+            </div>
+            
+            <h1 class="text-4xl font-extrabold text-pink-600 mb-2 tracking-tight">NARTISTYCS</h1>
+            <p class="text-lg text-gray-700 font-medium">Katalog Produk Kerajinan Lucu & Unik</p>
+            <div class="mt-4 p-4 bg-pink-50 rounded-lg border border-pink-200">
+                <h2 class="text-2xl font-semibold text-pink-700 mb-2">About Nartistycs</h2>
+                <p class="text-gray-600 leading-relaxed text-sm">NARTISTYCS adalah sebuah usaha yang fokus menciptakan produk kerajinan tangan (handmade) dengan bahan utama Clay dan Beads. Setiap produk dibuat dengan detail dan penuh ketulusan, menjadikannya unik dan personal. Kami percaya, seni kecil bisa membawa kebahagiaan besar!</p>
+            </div>
+        </header>
+
+        <!-- Bagian Katalog Produk -->
+        <main id="product-catalog" class="space-y-12">
+            <!-- Kategori akan diisi oleh JavaScript -->
+        </main>
+
+        <!-- Footer dan Kontak -->
+        <footer class="mt-12 pt-6 border-t border-pink-100 text-center">
+            <h3 class="text-xl font-bold text-pink-600 mb-4">Pesan & Hubungi Kami</h3>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-6">
+                <!-- Kontak Telepon -->
+                <div class="flex items-center justify-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <button id="copy-phone" class="text-gray-700 hover:text-pink-600 font-medium transition duration-150 ease-in-out cursor-pointer relative group">
+                        0857-0030-4840 (Klik untuk Salin)
+                        <span id="copy-message" class="absolute left-1/2 transform -translate-x-1/2 mt-1 px-2 py-1 bg-green-500 text-white text-xs rounded opacity-0 transition duration-300 pointer-events-none">Tersalin!</span>
+                    </button>
+                </div>
+                
+                <!-- Instagram -->
+                <a href="https://instagram.com/nartistycs" target="_blank" class="flex items-center justify-center space-x-2 text-gray-700 hover:text-pink-600 font-medium transition duration-150 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    <span>@nartistycs</span>
+                </a>
+            </div>
+
+            <p class="text-sm text-gray-500 mt-6">&copy; 2024 Nartistycs. Semua produk dibuat secara Handmade.</p>
+        </footer>
+    </div>
+
+    <!-- Modal Detail Produk (Hidden by default) -->
+    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all duration-300">
+            <div class="relative">
+                <img id="modal-image" src="" alt="Detail Produk" class="w-full h-64 object-cover">
+                <button onclick="closeModal()" class="absolute top-3 right-3 p-2 bg-white rounded-full text-gray-700 hover:bg-gray-100 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <h3 id="modal-name" class="text-3xl font-bold text-pink-700 mb-2"></h3>
+                <p id="modal-price" class="text-2xl font-extrabold text-green-600 mb-4"></p>
+                <div class="space-y-3 text-gray-700 text-sm">
+                    <p>
+                        <span class="font-semibold text-gray-800">Keterangan:</span> 
+                        <span id="modal-description"></span>
+                    </p>
+                    <p>
+                        <span class="font-semibold text-gray-800">Warna Tersedia:</span> 
+                        <span id="modal-colors" class="text-pink-500 font-medium"></span>
+                    </p>
+                    <p>
+                        <span class="font-semibold text-gray-800">Proses Pengerjaan:</span> 
+                        <span id="modal-process" class="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full text-xs font-semibold"></span>
+                    </p>
+                </div>
+                <a id="modal-cta" href="#" target="_blank" class="mt-6 block w-full text-center py-3 px-4 bg-pink-600 text-white font-bold rounded-lg hover:bg-pink-700 transition duration-200">
+                    Pesan Sekarang via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Data Produk
+        const products = [
+            // Clay Keychain
+            { 
+                category: "Clay Keychain", 
+                name: "Fire Winkstreak", 
+                price: 6000, 
+                colors: "Merah, Ungu, Biru", 
+                process: "5-7 Hari Kerja (Handmade)", 
+                description: "Gantungan kunci clay berbentuk api, sangat cocok untuk tas atau kunci. Dibuat dari polymer clay berkualitas tinggi dan dilapisi varnish agar tahan lama.",
+                image: "https://i.imgur.com/VsnBGqi.jpeg" // Placeholder image
+            },
+            { 
+                category: "Clay Keychain", 
+                name: "The Pond Pair", 
+                price: 8000, 
+                colors: "Hijau", 
+                process: "5-7 Hari Kerja (Handmade)", 
+                description: "Gantungan kunci katak yang lucu dan menggemaskan dengan daun bunga teratai yang mempercantik tampilannya. Detail dibuat dengan cinta. Cocok untuk hadiah atau koleksi pribadi.",
+                image: "https://i.imgur.com/OSvX9f9.jpeg" // Placeholder image
+            },
+            { 
+                category: "Clay Keychain", 
+                name: "Lucky Fishy", 
+                price: 7500, 
+                colors: "Pink, Krem", 
+                process: "5-6 Hari Kerja (Handmade)", 
+                description: "Gantungan kunci dengan desain kue bungeoppang berbentuk ikan dengan manik manik daun semanggi memperindah tampilan. Tampilan lucu dan minimalis, cocok untuk kalian yang suka coquette.",
+                image: "https://i.imgur.com/DJbMhcB.jpeg" // Placeholder image
+            },
+	    { 
+                category: "Clay Keychain", 
+                name: "Strawberry Cake", 
+                price: 8000, 
+                colors: "Krem", 
+                process: "5-6 Hari Kerja (Handmade)", 
+                description: "Gantungan kunci dengan desain sebuah kue strawberry dengan buah strawberry diatasnya",
+                image: "https://placehold.co/400x300/fecaca/ef4444?text=Coming+Soon" // Placeholder image
+            },
+
+            // Beads Keychain
+            { 
+                category: "Beads Keychain", 
+                name: "Flowerfly knots", 
+                price: 6000, 
+                colors: "Coklat emas, Pink, Merah, Ungu", 
+                process: "1 Hari Kerja", 
+                description: "Gantungan kunci manik-manik (beads) dengan knot berbentuk bunga yang cantik. Kuat dan bisa custom inisial nama kalian (Catat ketika order).",
+                image: "https://i.imgur.com/X8mzVSF.jpeg" // Placeholder image
+            },
+
+            // Phone Strap
+            { 
+                category: "Strap Phone", 
+                name: "Fairy Nature", 
+                price: 8000, 
+                colors: "Kombinasi kuning, oranye, hijau", 
+                process: "1 Hari Kerja", 
+                description: "Strap phone manik-manik dengan nuansa warna yang fresh dan transparan. Desain minimalis namun tetap trendi.",
+                image: "https://i.imgur.com/7vUcuWE.jpeg" // Placeholder image
+            },
+            { 
+                category: "Strap Phone", 
+                name: "Simply Candy Star", 
+                price: 8000, 
+                colors: "Kombinasi hijau dan pink fanta", 
+                process: "1 Hari Kerja", 
+                description: "Strap phone yang terinspirasi dari sebuah bunga berwarna pink dengan daunnya yang hijau. Menggunakan manik-manik transparan dan mutiara sintetis.",
+                image: "https://i.imgur.com/GL0oXm5.jpeg" // Placeholder image
+            },
+            { 
+                category: "Strap Phone", 
+                name: "Happy Future", 
+                price: 8000, 
+                colors: "Kombinasi kuning dan biru muda", 
+                process: "1 Hari Kerja", 
+                description: "Strap phone dengan kombinasi manik-manik kuning dan biru muda. Tampilan yang cerah sangat cocok untuk kamu yang selalu ceria.",
+                image: "https://i.imgur.com/qwyKh9u.jpeg" // Placeholder image
+            },
+	    { 
+                category: "Strap Phone", 
+                name: "Floral Pale", 
+                price: 3000, 
+                colors: "Berwarna-warni", 
+                process: "1 Hari Kerja", 
+                description: "Strap phone dengan kombinasi manik-manik kuning dan biru muda. Tampilan yang cerah sangat cocok untuk kamu yang selalu ceria.",
+                image: "https://placehold.co/400x300/fecaca/ef4444?text=Coming+Soon" // Placeholder image
+            },
+	    { 
+                category: "Strap Phone", 
+                name: "Ruby Bloom", 
+                price: 5000, 
+                colors: "Merah", 
+                process: "1 Hari Kerja", 
+                description: "Strap phone dengan kombinasi manik-manik kuning dan biru muda. Tampilan yang cerah sangat cocok untuk kamu yang selalu ceria.",
+                image: "https://placehold.co/400x300/fecaca/ef4444?text=Coming+Soon" // Placeholder image
+            },
+	    { 
+                category: "Strap Phone", 
+                name: "Celestial Petals", 
+                price: 4000, 
+                colors: "Pink, Biru, Ungu", 
+                process: "1 Hari Kerja", 
+                description: "Strap phone dengan kombinasi manik-manik kuning dan biru muda. Tampilan yang cerah sangat cocok untuk kamu yang selalu ceria.",
+                image: "https://placehold.co/400x300/fecaca/ef4444?text=Coming+Soon" // Placeholder image
+            },
+	    // Bracelets
+            { 
+                category: "Bracelets", 
+                name: "Golden Hour", 
+                price: 4500, 
+                colors: "Orange", 
+                process: "1 Hari Kerja", 
+                description: "Gelang manik manik yang super aestethic, lucu dan cantik.",
+                image: "https://placehold.co/400x300/fecaca/ef4444?text=Coming+Soon" // Placeholder image
+            },
+	    { 
+                category: "Bracelets", 
+                name: "Blue Hour", 
+                price: 4500, 
+                colors: "Biru", 
+                process: "1 Hari Kerja", 
+                description: "Gelang manik manik yang super aestethic, lucu dan cantik.",
+                image: "https://placehold.co/400x300/fecaca/ef4444?text=Coming+Soon" // Placeholder image
+            },
+        ];
+
+        const catalogContainer = document.getElementById('product-catalog');
+        const modal = document.getElementById('product-modal');
+
+        // Fungsi untuk mengelompokkan produk berdasarkan kategori
+        const groupedProducts = products.reduce((acc, product) => {
+            acc[product.category] = acc[product.category] || [];
+            acc[product.category].push(product);
+            return acc;
+        }, {});
+
+        // Fungsi untuk memformat harga ke Rupiah
+        const formatRupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        };
+
+        // Fungsi untuk membuat kartu produk
+        const createProductCard = (product) => {
+            const card = document.createElement('div');
+            card.className = 'bg-white border border-pink-100 rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden cursor-pointer';
+            card.onclick = () => openModal(product);
+
+            card.innerHTML = `
+                <img src="${product.image}" onerror="this.onerror=null;this.src='https://placehold.co/400x300/fecaca/ef4444?text=Foto+Produk';" alt="Foto Produk ${product.name}" class="w-full h-48 object-cover object-center">
+                <div class="p-5">
+                    <h4 class="text-xl font-bold text-gray-800 mb-1">${product.name}</h4>
+                    <p class="text-xs text-pink-500 font-semibold mb-3">${product.category}</p>
+                    <p class="text-2xl font-extrabold text-pink-600 mb-4">${formatRupiah(product.price)}</p>
+                    <span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full">
+                        Proses: ${product.process}
+                    </span>
+                </div>
+            `;
+            return card;
+        };
+
+        // Render Katalog ke HTML
+        Object.keys(groupedProducts).forEach(category => {
+            const categorySection = document.createElement('section');
+            categorySection.className = 'mb-10';
+
+            categorySection.innerHTML = `
+                <h3 class="text-3xl font-bold text-pink-600 mb-6 pb-2 border-b-4 border-pink-200">
+                    Kategori: ${category}
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="category-${category.replace(/\s/g, '-')}-container">
+                    <!-- Cards will go here -->
+                </div>
+            `;
+            catalogContainer.appendChild(categorySection);
+
+            const gridContainer = document.getElementById(`category-${category.replace(/\s/g, '-')}-container`);
+            groupedProducts[category].forEach(product => {
+                gridContainer.appendChild(createProductCard(product));
+            });
+        });
+
+        // --- FUNGSI MODAL (Detail Produk) ---
+
+        const phoneNumber = "6285700304840"; // Nomor HP yang akan di-copy dan digunakan untuk WhatsApp
+        const waMessage = (productName) => `Halo, saya tertarik dengan produk ${productName} yang ada di katalog. Apakah produk ini masih tersedia dan bagaimana cara pemesanannya?`;
+
+        function openModal(product) {
+            document.getElementById('modal-image').src = product.image;
+            document.getElementById('modal-name').textContent = product.name;
+            document.getElementById('modal-price').textContent = formatRupiah(product.price);
+            document.getElementById('modal-description').textContent = product.description;
+            document.getElementById('modal-colors').textContent = product.colors;
+            document.getElementById('modal-process').textContent = product.process;
+
+            // Link WhatsApp CTA
+            const ctaButton = document.getElementById('modal-cta');
+            const encodedMessage = encodeURIComponent(waMessage(product.name));
+            ctaButton.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Menonaktifkan scroll di background
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Mengaktifkan kembali scroll
+        }
+
+        // Tutup modal jika klik di luar area modal
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+
+        // --- FUNGSI COPY NOMOR TELEPON ---
+
+        document.getElementById('copy-phone').addEventListener('click', function() {
+            const phoneText = phoneNumber;
+            
+            // Menggunakan document.execCommand('copy') untuk kompatibilitas yang lebih baik di iFrame
+            const el = document.createElement('textarea');
+            el.value = phoneText;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            // Tampilkan pesan "Tersalin!"
+            const messageElement = document.getElementById('copy-message');
+            messageElement.classList.add('opacity-100', 'bg-green-500');
+            messageElement.classList.remove('opacity-0');
+            
+            setTimeout(() => {
+                messageElement.classList.remove('opacity-100', 'bg-green-500');
+                messageElement.classList.add('opacity-0');
+            }, 2000);
+        });
+
+        // Tambahkan fungsi untuk menutup modal menggunakan tombol ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
